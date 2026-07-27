@@ -1,0 +1,205 @@
+<!DOCTYPE html> 
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- ===== VTURB PRELOAD (carrega o player e o vídeo mais rápido) ===== -->
+  <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+  <link rel="preload" href="https://scripts.converteai.net/20a070d6-dd0d-4397-aab3-ecc0fb3a86c2/players/6a65a3b466e0e2ee1ed7d023/v4/player.js" as="script">
+  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+  <link rel="dns-prefetch" href="https://cdn.converteai.net">
+  <link rel="dns-prefetch" href="https://scripts.converteai.net">
+  <link rel="dns-prefetch" href="https://images.converteai.net">
+  <link rel="dns-prefetch" href="https://license.vturb.com">
+  <!-- ===== FIM VTURB PRELOAD ===== -->
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '951876443979087');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=951876443979087&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <title>Metodo</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f2ede4;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      flex: 1;
+      justify-content: center;
+      padding: 40px 20px 20px;
+    }
+
+    .headline {
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      margin-bottom: 18px;
+      font-family: Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.4;
+    }
+
+    .headline span {
+      color: #c0392b;
+    }
+
+    .video-container {
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .live-counter {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+      background: #fff;
+      border: 1px solid #dddfe2;
+      border-radius: 20px;
+      padding: 8px 18px;
+    }
+
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #e00;
+      flex-shrink: 0;
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .live-text {
+      font-size: 14px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .live-text span {
+      color: #e00;
+    }
+
+    .sound-hint {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #555;
+      font-size: 13.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .sound-hint svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    footer {
+      width: 100%;
+      text-align: center;
+      padding: 32px 0 18px;
+      color: #999;
+      font-size: 12.5px;
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- HEADLINE -->
+    <div class="headline">
+      Scopri il semplice trucco che restituisce la <span>vitalità sessuale</span> agli uomini over 40
+    </div>
+
+    <div class="video-container">
+      <vturb-smartplayer id="vid-6a65a3b466e0e2ee1ed7d023" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 178.14814814814815% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
+      <script type="text/javascript">
+        var s=document.createElement("script");
+        s.src="https://scripts.converteai.net/20a070d6-dd0d-4397-aab3-ecc0fb3a86c2/players/6a65a3b466e0e2ee1ed7d023/v4/player.js";
+        s.async=!0;
+        document.head.appendChild(s);
+      </script>
+    </div>
+
+    <!-- CONTADOR AO VIVO -->
+    <div class="live-counter">
+      <div class="live-dot"></div>
+      <div class="live-text"><span id="counter">285</span> persone lo stanno guardando in questo momento</div>
+    </div>
+
+    <div class="sound-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      </svg>
+      Assicurati che l'audio sia attivato
+    </div>
+
+  </div>
+
+  <footer>
+    Copyright 2025 ®<br>
+    Tutti i diritti riservati
+  </footer>
+
+  <!-- CONTADOR AO VIVO - SCRIPT -->
+  <script>
+    var count = 285;
+    function updateCounter() {
+      var change = Math.floor(Math.random() * 7) - 3;
+      count = Math.max(240, Math.min(350, count + change));
+      document.getElementById('counter').textContent = count;
+    }
+    setInterval(updateCounter, 3000);
+  </script>
+
+</body>
+</html>
