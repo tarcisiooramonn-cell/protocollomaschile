@@ -200,6 +200,116 @@
         font-size: 13px;
       }
     }
+
+    /* =========================
+       EXIT INTENT POPUP
+    ========================== */
+    .exit-offer-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+
+    .exit-offer-overlay.is-open {
+      display: flex;
+    }
+
+    .exit-offer-modal {
+      width: 100%;
+      max-width: 430px;
+      background: #fff;
+      border-radius: 18px;
+      padding: 28px 22px 20px;
+      text-align: center;
+      box-shadow: 0 24px 70px rgba(0,0,0,.35);
+      animation: exitOfferIn .22s ease-out;
+    }
+
+    @keyframes exitOfferIn {
+      from { opacity: 0; transform: translateY(12px) scale(.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .exit-offer-eyebrow {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: #fff0ed;
+      color: #b83224;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .exit-offer-title {
+      margin: 0 0 12px;
+      color: #171717;
+      font-family: Georgia, serif;
+      font-size: 27px;
+      line-height: 1.15;
+      font-weight: 800;
+    }
+
+    .exit-offer-copy {
+      margin: 0 0 20px;
+      color: #444;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .exit-offer-accept {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      padding: 16px 18px;
+      background: #c0392b;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.2;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(192,57,43,.28);
+    }
+
+    .exit-offer-accept:active {
+      transform: translateY(1px);
+    }
+
+    .exit-offer-decline {
+      margin-top: 14px;
+      border: 0;
+      background: transparent;
+      color: #777;
+      font-size: 13px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .exit-offer-modal {
+        max-width: 390px;
+        padding: 25px 18px 18px;
+        border-radius: 16px;
+      }
+
+      .exit-offer-title {
+        font-size: 24px;
+      }
+
+      .exit-offer-copy {
+        font-size: 15px;
+      }
+    }
+
   </style>
 
   <!-- =====================================================
@@ -305,6 +415,42 @@
     </div>
   </div>
 
+
+  <!-- =========================
+       EXIT INTENT POPUP
+  ========================== -->
+  <div
+    id="exitOfferOverlay"
+    class="exit-offer-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="exitOfferTitle"
+    aria-hidden="true"
+  >
+    <div class="exit-offer-modal">
+      <div class="exit-offer-eyebrow">Offerta riservata</div>
+
+      <h2 id="exitOfferTitle" class="exit-offer-title">
+        Stanco dei video lunghi?
+      </h2>
+
+      <p class="exit-offer-copy">
+        Se preferisci andare dritto al punto, ti lascio qui un accesso diretto
+        con uno sconto sul nostro <strong>Protocollo Maschile</strong>.
+        Vuoi approfittare di questo sconto adesso?
+      </p>
+
+      <button id="exitOfferAccept" class="exit-offer-accept" type="button">
+        SÌ, VOGLIO LO SCONTO ORA
+      </button>
+
+      <button id="exitOfferDecline" class="exit-offer-decline" type="button">
+        No, grazie. Esci dalla pagina
+      </button>
+    </div>
+  </div>
+
+
   <footer>
     Copyright 2025 ®<br>
     Tutti i diritti riservati
@@ -326,5 +472,101 @@
       setInterval(updateCounter,3000);
     })();
   </script>
+
+  <script>
+    (function(){
+      /* TROQUE SOMENTE ESTA URL PELO CHECKOUT COM DESCONTO */
+      var CHECKOUT_URL = 'https://checkout.kashpay.com.br/checkout/checkout-1790131035242';
+
+      var overlay = document.getElementById('exitOfferOverlay');
+      var acceptButton = document.getElementById('exitOfferAccept');
+      var declineButton = document.getElementById('exitOfferDecline');
+
+      var popupShown = false;
+      var allowExit = false;
+      var backTrapActive = false;
+
+      function openExitOffer(){
+        if (popupShown || allowExit || !overlay) return;
+
+        popupShown = true;
+        overlay.classList.add('is-open');
+        overlay.setAttribute('aria-hidden', 'false');
+
+        setTimeout(function(){
+          if (acceptButton) acceptButton.focus();
+        }, 50);
+      }
+
+      function leavePage(){
+        allowExit = true;
+
+        if (overlay) {
+          overlay.classList.remove('is-open');
+          overlay.setAttribute('aria-hidden', 'true');
+        }
+
+        /* Tenta voltar para a página anterior.
+           Se a aba não tiver histórico, substitui por uma página vazia. */
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.replace('about:blank');
+        }
+      }
+
+      /* DESKTOP:
+         Gatilho conservador de intenção de saída.
+         Só dispara quando o ponteiro REALMENTE deixa a área visível
+         pelo topo da janela (em direção às abas/barra do navegador).
+         Não existe gatilho por tempo, scroll, pausa, inatividade ou movimento comum. */
+      document.documentElement.addEventListener('mouseleave', function(event){
+        if (allowExit || popupShown) return;
+
+        if (event.clientY <= 0) {
+          openExitOffer();
+        }
+      });
+
+      /* MOBILE + DESKTOP:
+         Único segundo gatilho permitido: tentativa explícita de voltar no navegador.
+         Nenhum outro comportamento da página abre a oferta. */
+      try {
+        history.pushState({ exitOfferGuard: true }, '', window.location.href);
+        backTrapActive = true;
+
+        window.addEventListener('popstate', function(){
+          if (allowExit) return;
+
+          if (backTrapActive) {
+            history.pushState({ exitOfferGuard: true }, '', window.location.href);
+            openExitOffer();
+          }
+        });
+      } catch (e) {}
+
+      /* CTA: redireciona direto para o checkout. */
+      if (acceptButton) {
+        acceptButton.addEventListener('click', function(){
+          allowExit = true;
+
+          window.location.href = CHECKOUT_URL;
+        });
+      }
+
+      /* RECUSA: realmente sai da página. */
+      if (declineButton) {
+        declineButton.addEventListener('click', leavePage);
+      }
+
+      /* ESC equivale a recusar/sair. */
+      document.addEventListener('keydown', function(event){
+        if (event.key === 'Escape' && overlay && overlay.classList.contains('is-open')) {
+          leavePage();
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>
